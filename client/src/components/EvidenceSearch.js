@@ -7,6 +7,8 @@ import React, { useState, useEffect } from "react"
 import Select from "react-select"
 import { Link } from "react-router-dom"
 import { EvidenceCard } from "./EvidenceCard"
+import { Login } from "./Login"
+import { Logout } from "./Logout"
 
 export const EvidenceSearch = () => {
   const [seMethods, setSEMethods] = useState([])
@@ -129,10 +131,13 @@ export const EvidenceSearch = () => {
               >
                 View Results
               </Link>
+              <Login />
+              <Logout />
             </div>
           </form>
         </div>
-        <div>{evidenceCardTest}</div>
+        <div >
+        </div>
       </div>
     </div>
   )

@@ -1,3 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react'
 import { useGoogleLogout } from 'react-google-login'
 
@@ -20,7 +25,7 @@ export const Logout = () => {
     })
 
     return (
-        <button onClick={signOut} className='button'>
+        <button type='button' onClick={signOut} className='button'>
             <img src='icons/google.svg' alt='google login' className='icon'></img>
 
             <span className='buttonText'>Sign Out</span>
