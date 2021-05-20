@@ -1,5 +1,10 @@
+/* eslint-disable no-console */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
 export const refreshTokenSetup = (res) => {
-    //Timing to renew access token 
+    // Timing to renew access token 
     let refreshTiming = (res.tokenObj.expires_in || 3600 - 5 * 60) * 1000
 
     const refreshToken = async () => {
@@ -9,7 +14,7 @@ export const refreshTokenSetup = (res) => {
 
         console.log('new auth Token', newAuthRes.id_token)
 
-        //setup the other timer after the first one
+        // setup the other timer after the first one
         setTimeout(refreshToken, refreshTiming)
 
     }

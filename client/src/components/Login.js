@@ -1,3 +1,11 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-console */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/no-onchange */
+/* eslint-disable no-else-return */
 import React from 'react'
 import { useGoogleLogin } from 'react-google-login'
 
@@ -26,9 +34,12 @@ export const Login = () => {
     })
 
     return (
-        <button onClick={signIn} className='Button'>
-            <img src='icons/google.svg'></img>
-            <span className='buttonText'> Sign in with Google </span>
-        </button>
+
+        <div className="container-fluid bg-light text-light" >
+            <button type='button' onClick={signIn} className='btn btn-social'>
+                <img src='icons/google.svg' alt='sign in'></img>
+                <span className='buttonText'> Sign in with Google </span>
+            </button>
+        </div>
     )
 }
