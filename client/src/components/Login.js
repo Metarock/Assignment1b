@@ -6,9 +6,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-onchange */
 /* eslint-disable no-else-return */
+/* eslint no-undef: "error" */
+/* global _ */
 import React from 'react'
 import { useGoogleLogin } from 'react-google-login'
-
+import axios from "axios"
 
 // refresh token 
 import { refreshTokenSetup } from '../utils/refreshToken'
@@ -16,9 +18,28 @@ import { refreshTokenSetup } from '../utils/refreshToken'
 const clientId = '920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com'
 
 export const Login = () => {
+
+    // Check get request, if user already exists in our database.
+
     const onSuccess = (res) => {
         console.log("Login sucessful: currentUser: ", res.profileObj)
         refreshTokenSetup(res)
+
+        const data = {
+            googleId: res.profileObj.googleId,
+            name: res.profileObj.name,
+            email: res.profileObj.email,
+            imageUrl: res.profileObj.imageUrl,
+        }
+
+        axios
+        .post("http://localhost:5000/api/googles", data)
+        .then( () => {
+          console.log("Google data submit successful")
+        })
+        .catch(err => {
+          console.log(`Error submitting evidence${err.name}`)
+        })
     }
 
     const onFailure = (res) => {
@@ -32,6 +53,7 @@ export const Login = () => {
         isSignedIn: true,
         accessType: 'offline'
     })
+
 
     return (
 
