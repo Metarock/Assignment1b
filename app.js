@@ -6,14 +6,15 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const connectDB = require('./config/db');
-
+const google = require('./GoogleToken.js');
 const app = express();
 
 const routes = require('./routes/api/evidences');
+const googleRoutes = require('./routes/api/googles')
 
 // connect to DB
 connectDB();
-
+console.log('hello ', google());
 // cors
 app.use(cors({ origin: true, credentials: true }));
 
@@ -25,6 +26,8 @@ app.use(express.json({ extended: false }));
 // });
 
 app.use('/api/evidences', routes);
+app.use('/api/googles', googleRoutes);
+
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')))
