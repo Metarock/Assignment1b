@@ -48,7 +48,7 @@ onSubmit = e => {
   }
 
   axios
-    .post("http://localhost:8082/api/evidences", data)
+    .post("/api/evidences", data)
     .then(res => {
       this.setState({
         article: "",

@@ -136,8 +136,7 @@ export const EvidenceSearch = () => {
             </div>
           </form>
         </div>
-        <div >
-        </div>
+        <div></div>
       </div>
     </div>
   )
