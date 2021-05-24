@@ -6,6 +6,7 @@ const GoogleSchema = new mongoose.Schema({
   googleId: {
     type: String, // type of data
     required: true, // input is required
+    unique: true,
   },
   name: {
     type: String,
