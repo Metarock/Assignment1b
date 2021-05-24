@@ -28,7 +28,6 @@ app.use(express.json({ extended: false }));
 app.use('/api/evidences', routes);
 app.use('/api/googles', googleRoutes);
 
-console.log(google());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')))
 
