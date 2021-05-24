@@ -53,7 +53,7 @@ export const SubmitEvidence = () => {
     }
 
     axios
-      .post("http://localhost:5000/api/evidences", data)
+      .post("/api/evidences", data)
       .then(res => {
         setEvidence({
           article: "",

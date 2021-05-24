@@ -33,13 +33,13 @@ export const Login = () => {
         }
 
         axios
-        .post("http://localhost:5000/api/googles", data)
-        .then( () => {
-          console.log("Google data submit successful")
-        })
-        .catch(err => {
-          console.log(`Error submitting evidence${err.name}`)
-        })
+            .post("http://localhost:5000/api/googles", data)
+            .then(() => {
+                console.log("Google data submit successful")
+            })
+            .catch(err => {
+                console.log(`Error submitting evidence${err.name}`)
+            })
     }
 
     const onFailure = (res) => {
