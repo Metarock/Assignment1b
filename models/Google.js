@@ -19,7 +19,9 @@ const GoogleSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
   },
-
+  role: {
+    type: String,
+  }
 });
 
 module.exports = Google = mongoose.model('User', GoogleSchema);

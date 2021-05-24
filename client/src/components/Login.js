@@ -29,6 +29,7 @@ export const Login = () => {
             name: res.profileObj.name,
             email: res.profileObj.email,
             imageUrl: res.profileObj.imageUrl,
+            role: "user",
         }
 
         axios
