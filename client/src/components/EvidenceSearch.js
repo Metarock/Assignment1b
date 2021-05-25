@@ -141,6 +141,15 @@ export const EvidenceSearch = () => {
               >
                 Edit Evidence
               </Link>
+              <Link
+                to={{
+                  pathname: `/view-users`,
+                  searchParams: { ...searchInfo }
+                }}
+                className="btn btn-outline-info btn-lg btn-block"
+              >
+                Show Users
+              </Link>
               <div>
                 <Login />
                 <Logout />
