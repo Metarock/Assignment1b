@@ -18,11 +18,17 @@ import { refreshTokenSetup } from "../utils/refreshToken"
 const clientId =
   "920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com"
 
+<<<<<<< HEAD
 export const Login = ({setSession}) => {
+=======
+export const Login = () => {
+  // Check get request, if user already exists in our database.
+>>>>>>> 6ceb466877f6da1a7c5d7df9d24efd900750b89e
 
   const onSuccess = res => {
     console.log("Login sucessful: currentUser: ", res.profileObj)
 
+<<<<<<< HEAD
     const getUserRole = () => {
         
         axios
@@ -76,6 +82,14 @@ export const Login = ({setSession}) => {
 
     const onFailure = (res) => {
         console.log('Login failed: res: ', res)
+=======
+    const data = {
+      googleId: res.profileObj.googleId,
+      name: res.profileObj.name,
+      email: res.profileObj.email,
+      imageUrl: res.profileObj.imageUrl,
+      role: "user"
+>>>>>>> 6ceb466877f6da1a7c5d7df9d24efd900750b89e
     }
 
     axios
