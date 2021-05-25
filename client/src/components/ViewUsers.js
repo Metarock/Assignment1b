@@ -13,66 +13,62 @@ import { useGoogleLogin } from "react-google-login"
 import axios from "axios"
 import { User } from "./User"
 
-
 export const ViewUsers = () => {
-    const [display, setDisplay] = useState([{}])
+  const [display, setDisplay] = useState([{}])
 
-    let displayItems
+  let displayItems
 
-    useEffect(() => {
-        axios
-        .get("http://localhost:5000/api/googles")
-        .then(res => {
-            console.log("Got users details")
-            setDisplay(res.data)
-        })
-        .catch(err => {
-            console.log(`Error from View Users ${err.name}`)
-        })
-    }, [])
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/googles")
+      .then(res => {
+        console.log("Got users details")
+        setDisplay(res.data)
+      })
+      .catch(err => {
+        console.log(`Error from View Users ${err.name}`)
+      })
+  }, [])
 
-    if (display) {
-        const results = display
-        console.log(results)
-        if (results.length > 0) {
-    
-            displayItems = (
-              <table className="table text-light">
-                {results.map((result, k) => (
-                  <User userData={result} key={k} />
-                ))}
-              </table>
-            )
-    
-        } else {
-          displayItems = <h2 className="lead text-light">No Results Found</h2>
-        }
-        // eslint-disable-next-line no-console
-        console.log("There are results returned")
-      }
+  if (display) {
+    const results = display
+    console.log(results)
+    if (results.length > 0) {
+      displayItems = (
+        <table className="table text-light">
+          {results.map((result, k) => (
+            <User userData={result} key={k} />
+          ))}
+        </table>
+      )
+    } else {
+      displayItems = <h2 className="lead text-light">No Results Found</h2>
+    }
+    // eslint-disable-next-line no-console
+    console.log("There are results returned")
+  }
 
-      return (
-        <div className="box bg-dark">
-        <div
-          id="result-container"
-          className="container-fluid bg-dark text-light"
-          style={{ height: "100%" }}
-        >
-          <div className="row">
-            <div className="col-12">{/* Nav bar here? */}</div>
+  return (
+    <div className="box bg-dark">
+      <div
+        id="result-container"
+        className="container-fluid bg-dark text-light"
+        style={{ height: "100%" }}
+      >
+        <div className="row">
+          <div className="col-12">{/* Nav bar here? */}</div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <h1 className="display-2">Users</h1>
           </div>
-          <div className="row">
-            <div className="col-12">
-              <h1 className="display-2">Users</h1>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-              <div className="container-fluid">{displayItems}</div>
-            </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <div className="container-fluid">{displayItems}</div>
           </div>
         </div>
       </div>
-      )
+    </div>
+  )
 }
-
