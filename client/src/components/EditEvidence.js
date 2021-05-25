@@ -3,12 +3,14 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from "react"
 import Select from "react-select"
 import axios from "axios"
 import { EvidenceCard } from "./EvidenceCard"
 
 export const EditEvidence = () => {
+  const [display, setDisplay] = useState([{}])
   const [evidence, setEvidence] = useState({
     article: "",
     author: "",
@@ -19,6 +21,8 @@ export const EditEvidence = () => {
     claim: "",
     claimStrength: ""
   })
+
+  let displayItems
 
   const claimStrengths = [
     { label: "Weakly Supports", value: "Weakly Supports" },
@@ -35,9 +39,105 @@ export const EditEvidence = () => {
     { label: "AGILE", value: "AGILE" }
   ]
 
+  const onChange = e => {
+    console.log(e)
+    setEvidence({ ...evidence, [e.target.name]: e.target.value })
+  }
+
+  const onSelectChange = (e, attribute) => {
+    setEvidence({ ...evidence, [attribute]: e.value })
+  }
+
   useEffect(() => {
     console.log("Edit Evidence page has loaded")
+    axios
+      .get("http://localhost:5000/api/evidences/")
+      .then(res => {
+        console.log(`Print-ShowEvidenceResults-API-response: ${res.data}`)
+        console.log(`The res data: ${res.data}`)
+        setDisplay(res.data)
+      })
+      .catch(err => {
+        console.log(`Error from Show Evidence Results${err.name}`)
+      })
   }, [])
 
-  return <div className="box bg-dark">Hello</div>
+  const submitEvidence = e => {
+    console.log("Submitting evidence")
+    console.log(evidence)
+    e.preventDefault()
+
+    const data = {
+      article: evidence.article,
+      author: evidence.author,
+      title: evidence.title,
+      journal: evidence.journal,
+      year: evidence.year,
+      sePractice: evidence.sePractice,
+      claim: evidence.claim,
+      claimStrength: evidence.claimStrength
+    }
+
+    axios
+      .post("/api/evidences", data)
+      .then(res => {
+        setEvidence({
+          article: "",
+          author: "",
+          title: "",
+          journal: "",
+          year: "",
+          sePractice: "",
+          claim: "",
+          claimStrength: ""
+        })
+        console.log("Evidence submit successful")
+      })
+      .catch(err => {
+        console.log(`Error submitting evidence${err.name}`)
+      })
+  }
+
+  if (display) {
+    const results = display
+    console.log(results)
+    if (results.length > 0) {
+
+        displayItems = (
+          <table className="table text-light">
+            {results.map((result, k) => (
+              <EvidenceCard evidenceData={result} key={k} />
+            ))}
+          </table>
+        )
+
+    } else {
+      displayItems = <h2 className="lead text-light">No Results Found</h2>
+    }
+    // eslint-disable-next-line no-console
+    console.log("There are results returned")
+  }
+  return (
+    <div className="box bg-dark">
+    <div
+      id="result-container"
+      className="container-fluid bg-dark text-light"
+      style={{ height: "100%" }}
+    >
+      <div className="row">
+        <div className="col-12">{/* Nav bar here? */}</div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <h1 className="display-2">SEEDS</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <div className="container-fluid">{displayItems}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  )
 }
