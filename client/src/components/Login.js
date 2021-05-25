@@ -12,23 +12,15 @@ import React from "react"
 import { useGoogleLogin } from "react-google-login"
 import axios from "axios"
 
-// refresh token
-import { refreshTokenSetup } from "../utils/refreshToken"
+// refresh token 
+import { refreshTokenSetup } from '../utils/refreshToken'
 
-const clientId =
-  "920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com"
+const clientId = '920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com'
 
-<<<<<<< HEAD
 export const Login = ({setSession}) => {
-=======
-export const Login = () => {
-  // Check get request, if user already exists in our database.
->>>>>>> 6ceb466877f6da1a7c5d7df9d24efd900750b89e
 
-  const onSuccess = res => {
-    console.log("Login sucessful: currentUser: ", res.profileObj)
+    // Check get request, if user already exists in our database.
 
-<<<<<<< HEAD
     const getUserRole = () => {
         
         axios
@@ -82,47 +74,24 @@ export const Login = () => {
 
     const onFailure = (res) => {
         console.log('Login failed: res: ', res)
-=======
-    const data = {
-      googleId: res.profileObj.googleId,
-      name: res.profileObj.name,
-      email: res.profileObj.email,
-      imageUrl: res.profileObj.imageUrl,
-      role: "user"
->>>>>>> 6ceb466877f6da1a7c5d7df9d24efd900750b89e
     }
 
-    axios
-      .post("/api/googles", data)
-      .then(() => {
-        console.log("Google data submit successful")
-      })
-      .catch(err => {
-        console.log(
-          `Error submitting evidence ${err.name}, it either exists or boop`
-        )
-      })
-    refreshTokenSetup(res)
-  }
+    const { signIn } = useGoogleLogin({
+        onSuccess,
+        onFailure,
+        clientId,
+        isSignedIn: true,
+        accessType: 'offline'
+    })
 
-  const onFailure = res => {
-    console.log("Login failed: res: ", res)
-  }
 
-  const { signIn } = useGoogleLogin({
-    onSuccess,
-    onFailure,
-    clientId,
-    isSignedIn: true,
-    accessType: "offline"
-  })
+    return (
 
-  return (
-    <div className="container-fluid bg-light text-light">
-      <button type="button" onClick={signIn} className="btn btn-social">
-        <img src="icons/google.svg" alt="sign in"></img>
-        <span className="buttonText"> Sign in with Google </span>
-      </button>
-    </div>
-  )
+        <div className="container-fluid bg-light text-light" >
+            <button type='button' onClick={signIn} className='btn btn-social'>
+                <img src='icons/google.svg' alt='sign in'></img>
+                <span className='buttonText'> Sign in with Google </span>
+            </button>
+        </div>
+    )
 }
