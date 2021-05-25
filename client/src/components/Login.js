@@ -12,14 +12,13 @@ import React from "react"
 import { useGoogleLogin } from "react-google-login"
 import axios from "axios"
 
-// refresh token 
-import { refreshTokenSetup } from '../utils/refreshToken'
+// refresh token
+import { refreshTokenSetup } from "../utils/refreshToken"
 
-const clientId = '920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com'
+const clientId =
+  "920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com"
 
 export const Login = ({setSession}) => {
-
-    // Check get request, if user already exists in our database.
 
     const getUserRole = () => {
         
@@ -76,22 +75,24 @@ export const Login = ({setSession}) => {
         console.log('Login failed: res: ', res)
     }
 
-    const { signIn } = useGoogleLogin({
-        onSuccess,
-        onFailure,
-        clientId,
-        isSignedIn: true,
-        accessType: 'offline'
-    })
+  // const onFailure = res => {
+  //   console.log("Login failed: res: ", res)
+  // }
 
+  const { signIn } = useGoogleLogin({
+    onSuccess,
+    onFailure,
+    clientId,
+    isSignedIn: true,
+    accessType: "offline"
+  })
 
-    return (
-
-        <div className="container-fluid bg-light text-light" >
-            <button type='button' onClick={signIn} className='btn btn-social'>
-                <img src='icons/google.svg' alt='sign in'></img>
-                <span className='buttonText'> Sign in with Google </span>
-            </button>
-        </div>
-    )
+  return (
+    <div className="container-fluid bg-light text-light">
+      <button type="button" onClick={signIn} className="btn btn-social">
+        <img src="icons/google.svg" alt="sign in"></img>
+        <span className="buttonText ml-5"> Sign in with Google </span>
+      </button>
+    </div>
+  )
 }

@@ -8,8 +8,8 @@ import React from "react"
 import { useGoogleLogout } from 'react-google-login'
 
 const clientId =
-    "920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com"
-
+  "920604998733-jlo1s9knrt4kpaet080pltjt8orengkk.apps.googleusercontent.com"
+  
 export const Logout = ({setSession}) => {
 
     const onLogoutSuccess = res => {
@@ -20,21 +20,21 @@ export const Logout = ({setSession}) => {
         alert(sessionStorage.getItem('isLoggedIn'))
     }
 
-    const onFailure = () => {
-        console.log("Handle Failure cases")
-    }
+  const onFailure = () => {
+    console.log("Handle Failure cases")
+  }
 
-    const { signOut } = useGoogleLogout({
-        clientId,
-        onLogoutSuccess,
-        onFailure
-    })
+  const { signOut } = useGoogleLogout({
+    clientId,
+    onLogoutSuccess,
+    onFailure
+  })
 
-    return (
-        <button type="button" onClick={signOut} className="button">
-            <img src="icons/google.svg" alt="google login" className="icon"></img>
+  return (
+    <button type="button" onClick={signOut} className="button">
+      <img src="icons/google.svg" alt="google login" className="icon"></img>
 
-            <span className="buttonText">Sign Out</span>
-        </button>
-    )
+      <span className="buttonText">Sign Out</span>
+    </button>
+  )
 }

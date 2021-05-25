@@ -76,96 +76,128 @@ export const EvidenceSearch = () => {
 
   let viewUserBtn = ""
   if(sessionStorage.userRole === "admin") {
-    viewUserBtn = <Link
-                    to={{ pathname: `/submit-evidence` }}
-                    className="btn btn-outline-light btn-lg btn-block"
-                  >
-                    View Users
-                  </Link>
+    viewUserBtn =  <Link
+                      to={{
+                        pathname: `/view-users`,
+                        searchParams: { ...searchInfo }
+                      }}
+                      className="btn btn-outline-info btn-lg btn-block"
+                    >
+                      Show Users
+                    </Link>
   } else {
     viewUserBtn = ""
   }
 
+  let editUserBtn = ""
+  if(sessionStorage.userRole === "admin") {
+    editUserBtn = <Link
+                    to={{
+                      pathname: `/edit`,
+                      searchParams: { ...searchInfo }
+                    }}
+                    className="btn btn-outline-info btn-lg btn-block"
+                  >
+                    Edit Evidence
+                  </Link>
+  } else {
+    editUserBtn = ""
+  }
+
   return (
-    <div
-      className="container-fluid bg-dark text-light"
-      style={{ height: "100vh" }}
-    >
-      <div className="row">
-        <div className="col-6">
-          <h1 className="display-3">SEEDS Version 1</h1>
+    <div className="box bg-dark">
+      <div
+        className="container-fluid bg-dark text-light"
+        style={{ height: "100%" }}
+      >
+        <div className="row">
+          <div className="col-4">
+            <h1 className="display-3">SEEDS Version 1</h1>
+          </div>
+          <div className="col-2 my-auto">
+            <Link
+              to={{ pathname: `/submit-evidence` }}
+              className="btn btn-outline-light btn-lg btn-block"
+            >
+              Submit Evidence
+            </Link>
+          </div>
+          <div className="col-2 my-auto">
+              {loginSession.loginName}
+          </div>
+          
+          <div className="col-2 my-auto">
+            { viewUserBtn }
+          </div>
+          <div className="col-2 my-auto">
+            { editUserBtn }
+          </div>
         </div>
-        <div className="col-2 my-auto">
-          <Link
-            to={{ pathname: `/submit-evidence` }}
-            className="btn btn-outline-light btn-lg btn-block"
-          >
-            Submit Evidence
-          </Link>
-        </div>
-        <div className="col-2 my-auto">
-            {loginSession.loginName}
-        </div>
-        
-        <div className="col-2 my-auto">
-          { viewUserBtn }
-        </div>
-      </div>
-      <div className="row align-items-center">
-        <div className="col-12" align="center">
-          <form>
-            <div className="form-group col-3">
-              <label className="lead fs-2">SE Practice:</label>
-              <Select
-                className="text-dark"
-                onChange={e => {
-                  onSelectChange(e, "seMethod")
-                }}
-                options={seList}
-              />
-              <br />
+        <div className="row align-items-center">
+          <div className="col-12" align="center">
+            <form>
+              <div className="form-group col-3">
+                <label className="lead fs-2">SE Practice:</label>
+                <Select
+                  className="text-dark"
+                  onChange={e => {
+                    onSelectChange(e, "seMethod")
+                  }}
+                  options={seList}
+                />
+                <br />
 
-              <label className="lead fs-2">Claim:</label>
-              <Select
-                className="text-dark"
-                onChange={e => onSelectChange(e, "claim")}
-                options={claimsList}
-              />
-              <br />
+                <label className="lead fs-2">Claim:</label>
+                <Select
+                  className="text-dark"
+                  onChange={e => onSelectChange(e, "claim")}
+                  options={claimsList}
+                />
+                <br />
 
-              <label className="lead fs-2">Year Range:</label>
-              <input
-                className="form-control"
-                type="text"
-                name="startYear"
-                onChange={onChange}
-                maxLength="4"
-                placeholder="Start Year e.g. 2000"
-              />
-              <input
-                className="form-control"
-                type="text"
-                name="endYear"
-                onChange={onChange}
-                maxLength="4"
-                placeholder="End Year e.g. 2010"
-              />
+                <label className="lead fs-2">Year Range:</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="startYear"
+                  onChange={onChange}
+                  maxLength="4"
+                  placeholder="Start Year e.g. 2000"
+                />
+                <input
+                  className="form-control"
+                  type="text"
+                  name="endYear"
+                  onChange={onChange}
+                  maxLength="4"
+                  placeholder="End Year e.g. 2010"
+                />
 
-              <Link
-                to={{
-                  pathname: `/show-results`,
-                  searchParams: { ...searchInfo }
-                }}
-                className="btn btn-outline-info btn-lg btn-block"
-              >
-                View Results
-              </Link>
-              <Login setSession={setSession}/>
-              <Logout setSession={setSession}/>
-            </div>
-          </form>
+                <Link
+                  to={{
+                    pathname: `/show-results`,
+                    searchParams: { ...searchInfo }
+                  }}
+                  className="btn btn-outline-info btn-lg btn-block"
+                >
+                  View Results
+                </Link>
+
+                <div className="row">
+                  <div className="col-12">
+                    {!sessionStorage.getItem('isLoggedIn') &&
+                      <Login setSession={setSession}/>
+                    }
+                    {sessionStorage.getItem('isLoggedIn') &&
+                       <Logout setSession={setSession}/>
+                    }
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div></div>
         </div>
-        <div></div>
       </div>
     </div>
   )
