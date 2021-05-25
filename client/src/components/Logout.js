@@ -17,7 +17,6 @@ export const Logout = ({setSession}) => {
 
         sessionStorage.clear();
         setSession(false, "", "", "");
-        alert(sessionStorage.getItem('isLoggedIn'))
     }
 
   const onFailure = () => {
