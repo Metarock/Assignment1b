@@ -38,7 +38,7 @@ export const ShowEvidenceResults = props => {
     // with the object's attributes
 
     axios
-      .get("/api/evidences/")
+      .get("./api/evidences/")
       .then(res => {
         console.log(`Print-ShowEvidenceResults-API-response: ${res.data}`)
         console.log(`The res data: ${res.data}`)

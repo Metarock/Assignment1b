@@ -23,7 +23,7 @@ export const Login = ({setSession}) => {
     const getUserRole = () => {
         
         axios
-            .get("http://localhost:5000/api/googles/")
+            .get("./api/googles/")
             .then(response => {
                 console.log(response.data)
                 response.data.forEach(element => {
@@ -51,7 +51,7 @@ export const Login = ({setSession}) => {
         }
 
         axios
-            .post("http://localhost:5000/api/googles/", data)
+            .post("./api/googles/", data)
             .then(() => {
                 console.log("Google data submit successful")               
             })
