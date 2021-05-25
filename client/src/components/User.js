@@ -6,7 +6,7 @@ import React from "react"
 
 export const User = ({ userData }) => {
   const user = userData
-  console.log(user.googleId)
+  console.log(user.role)
 
   return (
     <tr>

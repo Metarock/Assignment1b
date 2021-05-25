@@ -20,7 +20,7 @@ export const ViewUsers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/googles")
+      .get("/api/googles")
       .then(res => {
         console.log("Got users details")
         setDisplay(res.data)
