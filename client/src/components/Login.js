@@ -73,19 +73,7 @@ export const Login = ({setSession}) => {
 
     const onFailure = (res) => {
         console.log('Login failed: res: ', res)
-
-      axios
-        .post("/api/googles", data)
-        .then(() => {
-          console.log("Google data submit successful")
-        })
-        .catch(err => {
-          console.log(
-            `Error submitting evidence ${err.name}, it either exists or boop`
-          )
-        })
-    refreshTokenSetup(res)
-  }
+    }
 
   // const onFailure = res => {
   //   console.log("Login failed: res: ", res)
@@ -103,7 +91,7 @@ export const Login = ({setSession}) => {
     <div className="container-fluid bg-light text-light">
       <button type="button" onClick={signIn} className="btn btn-social">
         <img src="icons/google.svg" alt="sign in"></img>
-        <span className="buttonText"> Sign in with Google </span>
+        <span className="buttonText ml-5"> Sign in with Google </span>
       </button>
     </div>
   )
