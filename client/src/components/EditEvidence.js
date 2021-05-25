@@ -141,3 +141,9 @@ export const EditEvidence = () => {
   </div>
   )
 }
+  useEffect(() => {
+    console.log("Edit Evidence page has loaded")
+  }, [])
+
+  return <div className="box bg-dark">Hello</div>
+}
