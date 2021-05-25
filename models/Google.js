@@ -21,7 +21,7 @@ const GoogleSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-  }
+  },
 });
 
 module.exports = Google = mongoose.model('User', GoogleSchema);

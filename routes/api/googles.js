@@ -6,7 +6,7 @@ const router = express.Router();
 // load Google model
 const Google = require('../../models/Google');
 
-// @route GET api/evidences
+// @route GET api/google
 // @description get all Google
 // @access public
 router.get('/', (_req, res) => {
@@ -15,7 +15,7 @@ router.get('/', (_req, res) => {
     .catch((_err) => res.status(404).json({ noevidencefound: 'No Google found' }));
 });
 
-// @route GET api/evidences/:id
+// @route GET api/google/:id
 // @description get single Google by id
 // @access public
 router.get('/:id', (req, res) => {
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
     .catch((_err) => res.status(404).json({ noevidencefound: 'No Google found' }));
 });
 
-// @route GET api/evidences
+// @route GET api/google
 // @description add/save Google
 // @access public
 router.post('/', (req, res) => {
@@ -42,7 +42,7 @@ router.put('/:id', (req, res) => {
     .catch((_err) => res.status(404).json({ error: 'No Google found' }));
 });
 
-// @route GET api/evidence/:id
+// @route GET api/google/:id
 // @description delete by id
 // @access public
 router.delete('/:id', (req, res) => {

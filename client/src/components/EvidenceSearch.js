@@ -22,6 +22,12 @@ export const EvidenceSearch = () => {
 
   const [showResults, setShowResults] = useState(false)
   const [evidenceCardTest, setEvidenceCards] = useState([])
+  const [loginSession, setLoginSession] = useState({
+    loggedIn: false,
+    loginID: "",
+    loginName: "",
+    userRole: ""
+  })
 
   // Temporary SE Methods list
   const seList = [
@@ -48,6 +54,10 @@ export const EvidenceSearch = () => {
     // console.log("Print id: " + props.match.params.id);
   }, [])
 
+  const setSession = (isLoggedIn, id, logName, role) => {
+    setLoginSession({...loginSession, loggedIn: isLoggedIn, loginID: id, loginName: logName, userRole: role});
+  }
+
   const onChange = e => {
     console.log(e)
     setSearchInfo({ ...searchInfo, [e.target.name]: e.target.value })
@@ -64,22 +74,41 @@ export const EvidenceSearch = () => {
     e.preventDefault()
   }
 
+  let viewUserBtn = ""
+  if(sessionStorage.userRole === "admin") {
+    viewUserBtn = <Link
+                    to={{ pathname: `/submit-evidence` }}
+                    className="btn btn-outline-light btn-lg btn-block"
+                  >
+                    View Users
+                  </Link>
+  } else {
+    viewUserBtn = ""
+  }
+
   return (
     <div
       className="container-fluid bg-dark text-light"
       style={{ height: "100vh" }}
     >
       <div className="row">
-        <div className="col-8">
-          <h1 className="display-2">SEEDS Version 1</h1>
+        <div className="col-6">
+          <h1 className="display-3">SEEDS Version 1</h1>
         </div>
-        <div className="col-4 my-auto">
+        <div className="col-2 my-auto">
           <Link
             to={{ pathname: `/submit-evidence` }}
             className="btn btn-outline-light btn-lg btn-block"
           >
             Submit Evidence
           </Link>
+        </div>
+        <div className="col-2 my-auto">
+            {loginSession.loginName}
+        </div>
+        
+        <div className="col-2 my-auto">
+          { viewUserBtn }
         </div>
       </div>
       <div className="row align-items-center">
@@ -131,8 +160,8 @@ export const EvidenceSearch = () => {
               >
                 View Results
               </Link>
-              <Login />
-              <Logout />
+              <Login setSession={setSession}/>
+              <Logout setSession={setSession}/>
             </div>
           </form>
         </div>
