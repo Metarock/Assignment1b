@@ -26,6 +26,6 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm run lint
-      - name: run pretty
+      - name: run pretty in frontend
         working-directory: ./client
         run: npm run pretty
